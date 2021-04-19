@@ -3,6 +3,7 @@ package com.conciliacaocob.conciliacaoConciliador.services;
 import com.conciliacaocob.conciliacaoConciliador.cobransaas.*;
 import com.conciliacaocob.conciliacaoConciliador.cobransaas.DTO.ContratoCobransaasDTO;
 import com.conciliacaocob.conciliacaoConciliador.model.Base;
+import com.conciliacaocob.conciliacaoConciliador.model.ConciliacaoCobranca;
 import com.conciliacaocob.conciliacaoConciliador.model.ContratoCobransaas;
 import com.conciliacaocob.conciliacaoConciliador.model.Emissor;
 import com.conciliacaocob.conciliacaoConciliador.repository.BaseRepository;
@@ -59,110 +60,123 @@ public class ContratoCobransaasService {
         return contratoCobransaasRepository.findById(id);
     }
 
-    @Async
-    public ResponseConsultaContratos buscarContratosCobransaas(Emissor emissor, long conciliacao) throws Exception {
+    public boolean salvarContratosCobransaas (ConciliacaoCobranca conciliacaoCobranca, List<ContratoCobransaas> contratos){
 
-        Base base = baseRepository.findById(emissor.getBase().getId());
 
-        DadosAcessoCobransaasDTO dadosAcesso = (DadosAcessoCobransaasDTO) getDadosAcessoApi(base);
 
-        logger.info("[Conciliação Parceiro Externo] - Consultando contratos na Tívea... ");
+        if (contratos != null){
+            contratoCobransaasRepository.saveAll(contratos);
+            return true;
+        }else{
+            return false;
+        }
 
-        int pagina = 0;
-        boolean continuarConsultando = false;
-
-        Map<String, String> mapParametros = new HashMap<>();
-        mapParametros.put("situacao", "PARCIAL,ABERTO");
-        mapParametros.put("page", "0");
-        mapParametros.put("size", "2000");
-
-        Type type2 = new TypeToken<ArrayList<ContratoCobransaas>>(){}.getType();
-
-        List<ContratoCobransaasDTO> contratos = new ArrayList<>();
-        int numeroDeConsultas = 1;
-        ResponseConsultaContratos responseConsultaContratos = new ResponseConsultaContratos();
-        responseConsultaContratos.setQuantidadeContratos(0);
-
-        ResponseCobransaas responseCobransaas = new ResponseCobransaas();
-
-        try {
-            Type type = new TypeToken<ContratoCobransaas>(){}.getType();
-            logger.info("[Conciliação Parceiro Externo] - Disparando primeira consulta... ");
-            responseCobransaas = processarRequisicao(dadosAcesso, "GET", mapParametros, ContratoCobransaasService.ENDERECO_API_CONTRATOS, null, type);
-
-            if (!responseCobransaas.isSucesso()) {
-                logger.error("[Conciliação Parceiro Externo] - Erro ao consultar todos os contratos do CobranSaaS: ");
-                responseConsultaContratos.setStatusConsulta(ResponseConsultaContratos.STATUS_ERRO);
-                responseConsultaContratos.setErro(responseCobransaas.getErro().toString());
-                throw new Exception("ERRO");
-            }
-
-            if (responseCobransaas != null && responseCobransaas.isSucesso()) {
-
-                ListagemContratosCobransaasResponse listagemAtual = (ListagemContratosCobransaasResponse) responseCobransaas.getResponseBody();
-
-                if (listagemAtual != null && !listagemAtual.getContratos().isEmpty()) {
-
-                    contratos = listagemAtual.getContratos();
-                    if (listagemAtual != null && listagemAtual.getContratos().size() == 2000) {
-                        continuarConsultando = true;
-                        pagina++;
-                    } else {
-                        continuarConsultando = false;
-                    }
-
-                    //A api de contratos retorna o número  máximo de registros 2000
-                    //Com isso temos que fazer uma nova requisição para pegar os demais registros
-                    while(continuarConsultando){
-
-                        pagina++;
-                        mapParametros.clear();
-                        mapParametros.put("situacao", "PARCIAL,ABERTO");
-                        mapParametros.put("page", String.valueOf(pagina));
-                        mapParametros.put("size", "2000");
-                        logger.info("[Conciliação Parceiro Externo] - Última consulta retornou mais de 2 mil contratos. Page: "+String.valueOf(pagina)+" Consulta de número "+numeroDeConsultas);
-
-                        responseCobransaas = processarRequisicao(dadosAcesso, "GET", mapParametros, ContratoCobransaasService.ENDERECO_API_CONTRATOS, null, type);
-
-                        if (responseCobransaas != null && responseCobransaas.isSucesso()) {
-                            listagemAtual = (ListagemContratosCobransaasResponse) responseCobransaas.getResponseBody();
-                            if (listagemAtual != null) {
-                                contratos.addAll(listagemAtual.getContratos());
-                            }
-                            if (listagemAtual != null && listagemAtual.getContratos().size() == 2000){
-                                continuarConsultando = true;
-                            }else{
-                                continuarConsultando = false;
-                            }
-                        }else{
-                            continuarConsultando = false;
-                        }
-                        numeroDeConsultas++;
-                    }
-
-                }
-                ArrayList<ContratoCobransaas> c = ContratoCobransaas.parseObjetoToListContratoCobransaasDTOtoContratoCobransaas(contratos, conciliacao);
-                List<ContratoCobransaas> con = listaContratosSalvos(PageRequest.of(1, 1),conciliacao);
-                //Trecho de código passivel de mudança no caso de não salvar os contratos na base local
-                if (con!=null || !con.isEmpty() ){
-                    contratoCobransaasRepository.deleteByConciliacao(conciliacao);
-                }
-                contratoCobransaasRepository.saveAll(c);
-
-                responseConsultaContratos.setStatusConsulta(ResponseConsultaContratos.STATUS_SUCESSO);
-                responseConsultaContratos.setQuantidadeContratos(c.size());
-
-            }
-            } catch (Exception e) {
-                logger.error("[Conciliação Parceiro Externo] - Erro ao consultar api de contratos no CobranSaaS - "+e.toString());
-                responseConsultaContratos.setStatusConsulta(ResponseConsultaContratos.STATUS_ERRO);
-                if (responseCobransaas != null) {
-                    responseConsultaContratos.setErro(responseCobransaas.toString());
-                }
-            }
-        logger.info("[Conciliação Parceiro Externo] - Consulta de contratos finalizada!!! ");
-        return responseConsultaContratos;
     }
+
+//    @Async
+//    public ResponseConsultaContratos buscarContratosCobransaas(Emissor emissor, long conciliacao) throws Exception {
+//
+//        Base base = baseRepository.findById(emissor.getBase().getId());
+//
+//        DadosAcessoCobransaasDTO dadosAcesso = (DadosAcessoCobransaasDTO) getDadosAcessoApi(base);
+//
+//        logger.info("[Conciliação Parceiro Externo] - Consultando contratos na Tívea... ");
+//
+//        int pagina = 0;
+//        boolean continuarConsultando = false;
+//
+//        Map<String, String> mapParametros = new HashMap<>();
+//        mapParametros.put("situacao", "PARCIAL,ABERTO");
+//        mapParametros.put("page", "0");
+//        mapParametros.put("size", "2000");
+//
+//        Type type2 = new TypeToken<ArrayList<ContratoCobransaas>>(){}.getType();
+//
+//        List<ContratoCobransaasDTO> contratos = new ArrayList<>();
+//        int numeroDeConsultas = 1;
+//        ResponseConsultaContratos responseConsultaContratos = new ResponseConsultaContratos();
+//        responseConsultaContratos.setQuantidadeContratos(0);
+//
+//        ResponseCobransaas responseCobransaas = new ResponseCobransaas();
+//
+//        try {
+//            Type type = new TypeToken<ContratoCobransaas>(){}.getType();
+//            logger.info("[Conciliação Parceiro Externo] - Disparando primeira consulta... ");
+//            responseCobransaas = processarRequisicao(dadosAcesso, "GET", mapParametros, ContratoCobransaasService.ENDERECO_API_CONTRATOS, null, type);
+//
+//            if (!responseCobransaas.isSucesso()) {
+//                logger.error("[Conciliação Parceiro Externo] - Erro ao consultar todos os contratos do CobranSaaS: ");
+//                responseConsultaContratos.setStatusConsulta(ResponseConsultaContratos.STATUS_ERRO);
+//                responseConsultaContratos.setErro(responseCobransaas.getErro().toString());
+//                throw new Exception("ERRO");
+//            }
+//
+//            if (responseCobransaas != null && responseCobransaas.isSucesso()) {
+//
+//                ListagemContratosCobransaasResponse listagemAtual = (ListagemContratosCobransaasResponse) responseCobransaas.getResponseBody();
+//
+//                if (listagemAtual != null && !listagemAtual.getContratos().isEmpty()) {
+//
+//                    contratos = listagemAtual.getContratos();
+//                    if (listagemAtual != null && listagemAtual.getContratos().size() == 2000) {
+//                        continuarConsultando = true;
+//                        pagina++;
+//                    } else {
+//                        continuarConsultando = false;
+//                    }
+//
+//                    //A api de contratos retorna o número  máximo de registros 2000
+//                    //Com isso temos que fazer uma nova requisição para pegar os demais registros
+//                    while(continuarConsultando){
+//
+//                        pagina++;
+//                        mapParametros.clear();
+//                        mapParametros.put("situacao", "PARCIAL,ABERTO");
+//                        mapParametros.put("page", String.valueOf(pagina));
+//                        mapParametros.put("size", "2000");
+//                        logger.info("[Conciliação Parceiro Externo] - Última consulta retornou mais de 2 mil contratos. Page: "+String.valueOf(pagina)+" Consulta de número "+numeroDeConsultas);
+//
+//                        responseCobransaas = processarRequisicao(dadosAcesso, "GET", mapParametros, ContratoCobransaasService.ENDERECO_API_CONTRATOS, null, type);
+//
+//                        if (responseCobransaas != null && responseCobransaas.isSucesso()) {
+//                            listagemAtual = (ListagemContratosCobransaasResponse) responseCobransaas.getResponseBody();
+//                            if (listagemAtual != null) {
+//                                contratos.addAll(listagemAtual.getContratos());
+//                            }
+//                            if (listagemAtual != null && listagemAtual.getContratos().size() == 2000){
+//                                continuarConsultando = true;
+//                            }else{
+//                                continuarConsultando = false;
+//                            }
+//                        }else{
+//                            continuarConsultando = false;
+//                        }
+//                        numeroDeConsultas++;
+//                    }
+//
+//                }
+//                ArrayList<ContratoCobransaas> c = ContratoCobransaas.parseObjetoToListContratoCobransaasDTOtoContratoCobransaas(contratos, conciliacao);
+//                List<ContratoCobransaas> con = listaContratosSalvos(PageRequest.of(1, 1),conciliacao);
+//                //Trecho de código passivel de mudança no caso de não salvar os contratos na base local
+//                if (con!=null || !con.isEmpty() ){
+//                    contratoCobransaasRepository.deleteByConciliacao(conciliacao);
+//                }
+//                contratoCobransaasRepository.saveAll(c);
+//
+//                responseConsultaContratos.setStatusConsulta(ResponseConsultaContratos.STATUS_SUCESSO);
+//                responseConsultaContratos.setQuantidadeContratos(c.size());
+//
+//            }
+//            } catch (Exception e) {
+//                logger.error("[Conciliação Parceiro Externo] - Erro ao consultar api de contratos no CobranSaaS - "+e.toString());
+//                responseConsultaContratos.setStatusConsulta(ResponseConsultaContratos.STATUS_ERRO);
+//                if (responseCobransaas != null) {
+//                    responseConsultaContratos.setErro(responseCobransaas.toString());
+//                }
+//            }
+//        logger.info("[Conciliação Parceiro Externo] - Consulta de contratos finalizada!!! ");
+//        return responseConsultaContratos;
+//    }
 
     public DadosAcessoCobransaasDTO getDadosAcessoApi(Base base) {
         DadosAcessoCobransaasDTO dadosAcesso = new DadosAcessoCobransaasDTO(base.getEnderecoCobransaas(),
