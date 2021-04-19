@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,7 +42,7 @@ public class ContratoCobransaas {
     private String dataEmissao;
 
     @SerializedName("dataOperacao")
-    private Calendar dataOperacao;
+    private Date dataOperacao;
 
     @SerializedName("situacao")
     private String situacao;
@@ -81,16 +82,16 @@ public class ContratoCobransaas {
     private Integer diasAtraso;
 
     @SerializedName("dataVencimento")
-    private Calendar dataVencimento;
+    private Date dataVencimento;
 
     @SerializedName("dataHoraModificacao")
-    private Calendar dataHoraModificacao;
+    private Date dataHoraModificacao;
 
     @SerializedName("lp")
     private Boolean lp;
 
     @SerializedName("dataLp")
-    private Calendar dataLp;
+    private Date dataLp;
 
     @SerializedName("siglaAtraso")
     private String siglaAtraso;
@@ -144,11 +145,11 @@ public class ContratoCobransaas {
         this.dataEmissao = dataEmissao;
     }
 
-    public Calendar getDataOperacao() {
+    public Date getDataOperacao() {
         return dataOperacao;
     }
 
-    public void setDataOperacao(Calendar dataOperacao) {
+    public void setDataOperacao(Date dataOperacao) {
         this.dataOperacao = dataOperacao;
     }
 
@@ -248,19 +249,19 @@ public class ContratoCobransaas {
         this.diasAtraso = diasAtraso;
     }
 
-    public Calendar getDataVencimento() {
+    public Date getDataVencimento() {
         return dataVencimento;
     }
 
-    public void setDataVencimento(Calendar dataVencimento) {
+    public void setDataVencimento(Date dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
 
-    public Calendar getDataHoraModificacao() {
+    public Date getDataHoraModificacao() {
         return dataHoraModificacao;
     }
 
-    public void setDataHoraModificacao(Calendar dataHoraModificacao) {
+    public void setDataHoraModificacao(Date dataHoraModificacao) {
         this.dataHoraModificacao = dataHoraModificacao;
     }
 
@@ -272,11 +273,11 @@ public class ContratoCobransaas {
         this.lp = lp;
     }
 
-    public Calendar getDataLp() {
+    public Date getDataLp() {
         return dataLp;
     }
 
-    public void setDataLp(Calendar dataLp) {
+    public void setDataLp(Date dataLp) {
         this.dataLp = dataLp;
     }
 
@@ -318,7 +319,7 @@ public class ContratoCobransaas {
             contrato.setNumeroParcelas((t.get("numeroParcelas") == null) ? null : Integer.parseInt(t.get("numeroParcelas").toString()));
             contrato.setDataEmissao((t.get("dataEmissao") == null) ? null : t.get("dataEmissao").toString());
             //contrato.setDataEmissao((t.get("dataEmissao") == null) ? null : FuncoesData.getCalendar(sdf.parse(t.get("dataEmissao").toString())));
-            contrato.setDataOperacao((t.get("dataOperacao") == null) ? null : FuncoesData.getCalendar(sdf.parse(t.get("dataOperacao").toString())));
+            contrato.setDataOperacao((t.get("dataOperacao") == null) ? null : FuncoesData.getData(t.get("dataOperacao").toString()));
             contrato.setSituacao((t.get("situacao") == null) ? "" : t.get("situacao").toString());
             contrato.setTipo((t.get("tipo") == null) ? "" : t.get("tipo").toString());
             contrato.setTaxaOperacao((t.get("taxaOperacao") == null) ? null : Double.parseDouble(t.get("taxaOperacao").toString()));
@@ -331,10 +332,10 @@ public class ContratoCobransaas {
             contrato.setSaldoTotal((t.get("saldoTotal") == null) ? null : Double.parseDouble(t.get("saldoTotal").toString()));
             contrato.setSaldoAtraso((t.get("saldoAtraso") == null) ? null : Double.parseDouble(t.get("saldoAtraso").toString()));
             contrato.setDiasAtraso((t.get("diasAtraso") == null) ? null : Integer.parseInt(t.get("diasAtraso").toString()));
-            contrato.setDataVencimento((t.get("dataVencimento") == null) ? null : FuncoesData.getCalendar(sdf.parse(t.get("dataVencimento").toString())));
+            contrato.setDataVencimento((t.get("dataVencimento") == null) ? null : FuncoesData.getData(t.get("dataVencimento").toString()));
             //contrato.setDataHoraModificacao((t.get("dataHoraModificacao") == null) ? null : FuncoesData.getCalendar(sdf.parse(t.get("dataHoraModificacao").toString())));
             contrato.setLp((t.get("lp") == null) ? null : Boolean.parseBoolean(t.get("lp").toString()));
-            contrato.setDataLp((t.get("dataLp") == null) ? null : FuncoesData.getCalendar(sdf.parse(t.get("dataLp").toString())));
+            contrato.setDataLp((t.get("dataLp") == null) ? null : FuncoesData.getData(t.get("dataLp").toString()));
             contrato.setSiglaAtraso((t.get("siglaAtraso") == null) ? "" : t.get("siglaAtraso").toString());
             ClienteContratoCobransaas cliente = new ClienteContratoCobransaas();
             Object objetcCliente = ((t.get("cliente") == null) ? null : (Object) t.get("cliente"));

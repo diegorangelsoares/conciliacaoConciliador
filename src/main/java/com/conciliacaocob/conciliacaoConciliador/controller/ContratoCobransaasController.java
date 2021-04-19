@@ -7,6 +7,8 @@ import com.conciliacaocob.conciliacaoConciliador.model.Emissor;
 import com.conciliacaocob.conciliacaoConciliador.services.ConciliacaoCobrancaService;
 import com.conciliacaocob.conciliacaoConciliador.services.ContratoCobransaasService;
 import com.conciliacaocob.conciliacaoConciliador.services.EmissorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,8 @@ import java.util.List;
 @RequestMapping(value="/api")
 @CrossOrigin(origins="*")
 public class ContratoCobransaasController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ContratoCobransaasController.class);
 
     @Autowired
     EmissorService emissorService;
@@ -38,15 +42,18 @@ public class ContratoCobransaasController {
     }
 
     @PostMapping(path="SalvarContratosCobransaas/")
-    public ResponseEntity<?> SalvarContratosCobransaas(@RequestParam("conciliacao") long conciliacao,
-                                                       @Validated @RequestBody List<ContratoCobransaas> contratos) throws Exception {
-        ConciliacaoCobranca conciliacaoCobranca = conciliacaoCobrancaService.buscarPorId(conciliacao);
+    public ResponseEntity<?> SalvarContratosCobransaas(
+                                                        //@RequestParam("conciliacao") long conciliacao,
+                                                        @Validated @RequestBody List<ContratoCobransaas> contratos) throws Exception {
+        //ConciliacaoCobranca conciliacaoCobranca = conciliacaoCobrancaService.buscarPorId(conciliacao);
         //Emissor emissor = emissorService.buscarPorId(dadosConciliacao.getIdEmissor());
-        if (conciliacaoCobranca != null){
+        ConciliacaoCobranca conciliacaoCobranca = new ConciliacaoCobranca();
+        logger.info("Chegou requisicao aqui...");
+        //if (conciliacaoCobranca != null){
             return new ResponseEntity<>(contratoCobransaasService.salvarContratosCobransaas(conciliacaoCobranca, contratos), HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>("Conciliacao "+conciliacaoCobranca+" nao encontrato!",HttpStatus.BAD_REQUEST);
-        }
+        //}else{
+        //    return new ResponseEntity<>("Conciliacao "+conciliacaoCobranca+" nao encontrato!",HttpStatus.BAD_REQUEST);
+        //}
 
     }
 
