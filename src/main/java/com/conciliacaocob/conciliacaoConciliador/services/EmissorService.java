@@ -1,8 +1,8 @@
 package com.conciliacaocob.conciliacaoConciliador.services;
 
-import com.conciliacaocob.conciliacaoParcExt.controller.EmissorResponse;
-import com.conciliacaocob.conciliacaoParcExt.model.Emissor;
-import com.conciliacaocob.conciliacaoParcExt.repository.EmissorRepository;
+import com.conciliacaocob.conciliacaoConciliador.controller.EmissorResponse;
+import com.conciliacaocob.conciliacaoConciliador.model.Emissor;
+import com.conciliacaocob.conciliacaoConciliador.repository.EmissorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

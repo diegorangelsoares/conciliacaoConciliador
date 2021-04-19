@@ -1,9 +1,9 @@
 package com.conciliacaocob.conciliacaoConciliador.cobransaas.DTO;
 
-import com.conciliacaocob.conciliacaoParcExt.cobransaas.ClienteContratoCobransaas;
-import com.conciliacaocob.conciliacaoParcExt.cobransaas.ProdutoCobransaas;
-import com.conciliacaocob.conciliacaoParcExt.model.ContratoCobransaas;
-import com.conciliacaocob.conciliacaoParcExt.util.FuncoesData;
+import com.conciliacaocob.conciliacaoConciliador.cobransaas.ClienteContratoCobransaas;
+import com.conciliacaocob.conciliacaoConciliador.cobransaas.ProdutoCobransaas;
+import com.conciliacaocob.conciliacaoConciliador.model.ContratoCobransaas;
+import com.conciliacaocob.conciliacaoConciliador.util.FuncoesData;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.internal.LinkedTreeMap;
 

@@ -1,6 +1,6 @@
 package com.conciliacaocob.conciliacaoConciliador.controller;
 
-import com.conciliacaocob.conciliacaoParcExt.services.EmissorService;
+import com.conciliacaocob.conciliacaoConciliador.services.EmissorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

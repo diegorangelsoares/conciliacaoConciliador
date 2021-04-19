@@ -1,6 +1,6 @@
 package com.conciliacaocob.conciliacaoConciliador.repository;
 
-import com.conciliacaocob.conciliacaoParcExt.model.ContratoCobransaas;
+import com.conciliacaocob.conciliacaoConciliador.model.ContratoCobransaas;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;

@@ -1,6 +1,6 @@
 package com.conciliacaocob.conciliacaoConciliador.cobransaas;
 
-import com.conciliacaocob.conciliacaoParcExt.model.ContratoCobransaas;
+import com.conciliacaocob.conciliacaoConciliador.model.ContratoCobransaas;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

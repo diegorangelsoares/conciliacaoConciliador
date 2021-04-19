@@ -1,12 +1,12 @@
 package com.conciliacaocob.conciliacaoConciliador.services;
 
-import com.conciliacaocob.conciliacaoParcExt.cobransaas.*;
-import com.conciliacaocob.conciliacaoParcExt.cobransaas.DTO.ContratoCobransaasDTO;
-import com.conciliacaocob.conciliacaoParcExt.model.Base;
-import com.conciliacaocob.conciliacaoParcExt.model.ContratoCobransaas;
-import com.conciliacaocob.conciliacaoParcExt.model.Emissor;
-import com.conciliacaocob.conciliacaoParcExt.repository.BaseRepository;
-import com.conciliacaocob.conciliacaoParcExt.repository.ContratoCobransaasRepository;
+import com.conciliacaocob.conciliacaoConciliador.cobransaas.*;
+import com.conciliacaocob.conciliacaoConciliador.cobransaas.DTO.ContratoCobransaasDTO;
+import com.conciliacaocob.conciliacaoConciliador.model.Base;
+import com.conciliacaocob.conciliacaoConciliador.model.ContratoCobransaas;
+import com.conciliacaocob.conciliacaoConciliador.model.Emissor;
+import com.conciliacaocob.conciliacaoConciliador.repository.BaseRepository;
+import com.conciliacaocob.conciliacaoConciliador.repository.ContratoCobransaasRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;

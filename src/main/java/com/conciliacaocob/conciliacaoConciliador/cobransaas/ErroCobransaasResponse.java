@@ -2,7 +2,7 @@ package com.conciliacaocob.conciliacaoConciliador.cobransaas;
 
 //import org.apache.commons.lang3.StringUtils;
 
-import com.conciliacaocob.conciliacaoParcExt.util.FuncoesData;
+import com.conciliacaocob.conciliacaoConciliador.util.FuncoesData;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.StringUtils;
 
