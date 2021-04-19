@@ -1,0 +1,32 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /conciliacaoConciliador
+spring:
+  application:
+    name: conciliacaoConciliador
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/conciliacaoconciliador
+    #    username: ${DB_USER:postgres}
+    #    password: ${DB_PASSWORD:postgres}
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimumIdle: 20
+      maxPoolSize: 30
+      autoReconnect: true
+      maxLifetime: 600000
+      connectionTimeout: 300000
+
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        temp:
+          use_jdbc_metadata_defaults: true
+        dialect:
+          org.hibernate.dialect.PostgreSQL9Dialect
+    database-plataform: org.hibernate.dialect.PostgreSQL9Dialect
