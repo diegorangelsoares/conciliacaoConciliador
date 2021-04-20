@@ -5,10 +5,11 @@ import java.util.Date;
 
 /**
  * Classe do objeto ConciliacaoCobranca
+ *
  * @author Diego Rangel - diegorangeljpa@gmail.com
  */
 @Entity
-@Table(name="T_CONCILIACAOCOBRANCA")
+@Table(name = "T_CONCILIACAOCOBRANCA")
 public class ConciliacaoCobranca {
 
     public static final String TIPO_CONCILIACAO_MANUAL = "M";
@@ -25,7 +26,7 @@ public class ConciliacaoCobranca {
     public static final String STATUS_CONCILIACAO_FINALIZADA_COM_ERRO = "E";
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
     public String nome;
 

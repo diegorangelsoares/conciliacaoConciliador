@@ -4,14 +4,15 @@ import javax.persistence.*;
 
 /**
  * Classe do objeto Base
+ *
  * @author Diego Rangel - diegorangeljpa@gmail.com
  */
 @Entity
-@Table(name="T_BASE")
+@Table(name = "T_BASE")
 public class Base {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String ipCards;

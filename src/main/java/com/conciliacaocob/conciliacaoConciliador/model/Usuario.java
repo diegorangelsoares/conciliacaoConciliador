@@ -4,10 +4,11 @@ import javax.persistence.*;
 
 /**
  * Classe do objeto Usuario
+ *
  * @author Diego Rangel - diegorangeljpa@gmail.com
  */
 @Entity
-@Table(name="T_USUARIO")
+@Table(name = "T_USUARIO")
 public class Usuario {
 
     private static final long serialVersionUID = 1L;
@@ -52,19 +53,27 @@ public class Usuario {
     public static final String MONITORIA = "u";
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    /** Nome do usuário */
+    /**
+     * Nome do usuário
+     */
     private String nome;
 
-    /** Login do usuário */
+    /**
+     * Login do usuário
+     */
     private String login;
 
-    /** Senha do usuário */
+    /**
+     * Senha do usuário
+     */
     private String senha;
 
-    /** CPF do usuário */
+    /**
+     * CPF do usuário
+     */
     private String cpf;
 
     public long getId() {

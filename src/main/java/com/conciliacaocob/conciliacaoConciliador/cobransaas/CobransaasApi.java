@@ -19,11 +19,9 @@ public class CobransaasApi {
 
         ArrayList<ContratoCobransaas> contratos = new ArrayList<>();
 
-            try {
+        try {
 
-                Gson gson = new Gson();
-
-
+            Gson gson = new Gson();
 
 
 //                        .registerTypeHierarchyAdapter(Date.class,
@@ -31,25 +29,27 @@ public class CobransaasApi {
 //                                        "yyyy-MM-dd'T'HH:mm:ss.SS", "yyyy-MM-dd'T'HH:mm:ss.SSS", "yyyy-MM-dd"))
 //                        .create();
 
-                Type type =  new TypeToken<Object>() {}.getType();
+            Type type = new TypeToken<Object>() {
+            }.getType();
 
 
-                type = new TypeToken<ArrayList<Object>>() {}.getType();
-                contratos = gson.fromJson("", type);
+            type = new TypeToken<ArrayList<Object>>() {
+            }.getType();
+            contratos = gson.fromJson("", type);
 
-                if (contratos != null && !contratos.isEmpty()) {
+            if (contratos != null && !contratos.isEmpty()) {
 
-                    //contratos = ContratoCobransaasDTO.parseObjetoToListContratoCobransaasDTO (contratos);
+                //contratos = ContratoCobransaasDTO.parseObjetoToListContratoCobransaasDTO (contratos);
 
-                }
-                //responseCobransaas.setResponseBody(new ListagemContratosCobransaasResponse(contratos));
+            }
+            //responseCobransaas.setResponseBody(new ListagemContratosCobransaasResponse(contratos));
 
-            } catch (Exception e) {
+        } catch (Exception e) {
 //                ErroLogicoException erro = new ErroLogicoException(
 //                        "[CobranSaaS] Problema ao processar a resposta do serviço");
 //                LoggerNeus.errorCobranSaaS(getClass(), erro);
-                throw new Throwable(e);
-            }
+            throw new Throwable(e);
+        }
 
 
         return contratos;
@@ -127,7 +127,6 @@ public class CobransaasApi {
 //        //LoggerNeus.errorCobranSaaS(getClass(), erro);
 //        throw erro;
 //    }
-
 
 
 }

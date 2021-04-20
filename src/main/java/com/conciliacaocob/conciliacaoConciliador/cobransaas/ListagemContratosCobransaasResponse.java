@@ -1,10 +1,11 @@
 package com.conciliacaocob.conciliacaoConciliador.cobransaas;
 
+
 import com.conciliacaocob.conciliacaoConciliador.cobransaas.DTO.ContratoCobransaasDTO;
 
 import java.util.ArrayList;
 
-public class ListagemContratosCobransaasResponse  implements ResponseBodyCobransaas {
+public class ListagemContratosCobransaasResponse implements ResponseBodyCobransaas {
 
     private ArrayList<ContratoCobransaasDTO> contratos;
 

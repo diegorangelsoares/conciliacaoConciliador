@@ -10,18 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value="/api")
-@CrossOrigin(origins="*")
+@RequestMapping(value = "/api")
+@CrossOrigin(origins = "*")
 public class EmissorController {
 
     @Autowired
     EmissorService emissorService;
 
-    @GetMapping(path="listarEmissores")
-    public ResponseEntity<?> listarEmissores(){
+    @GetMapping(path = "listarEmissores")
+    public ResponseEntity<?> listarEmissores() {
         return new ResponseEntity<>(emissorService.buscarTodos(), HttpStatus.OK);
     }
-
 
 
 }

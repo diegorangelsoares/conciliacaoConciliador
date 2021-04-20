@@ -1,104 +1,217 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.conciliacaocob</groupId>
-	<artifactId>conciliacaoConciliador</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<name>conciliacaoConciliador</name>
-	<description>Api responsavel por fazer a conciliacao</description>
-	<properties>
-		<java.version>11</java.version>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.conciliacaocob</groupId>
+    <artifactId>conciliacaoConciliador</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>conciliacaoConciliador</name>
+    <description>Api responsavel por fazer a conciliacao</description>
+    <properties>
+        <java.version>11</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.13</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.12.0</version>
-		</dependency>
-		<dependency>
-			<groupId>net.kyori</groupId>
-			<artifactId>adventure-text-serializer-gson</artifactId>
-			<version>4.7.0</version>
-		</dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-serializer-gson</artifactId>
+            <version>4.7.0</version>
+        </dependency>
 
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.8.2</version>
-		</dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.2</version>
+        </dependency>
 
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.8.6</version>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
+
+        <!-- POM modularizado-->
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">-->
+<!--    <modelVersion>4.0.0</modelVersion>-->
+<!--    <parent>-->
+<!--        <groupId>com.conciliacaocob</groupId>-->
+<!--        <artifactId>conciliacaoCob</artifactId>-->
+<!--        <version>0.0.1-SNAPSHOT</version>-->
+<!--        &lt;!&ndash;		<relativePath>POJETO_CONCILIACAO/pom.xml</relativePath>&ndash;&gt;-->
+<!--        &lt;!&ndash;		<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;&ndash;&gt;-->
+<!--    </parent>-->
+<!--    &lt;!&ndash;	<groupId>com.conciliacaocob</groupId>&ndash;&gt;-->
+<!--    <artifactId>conciliacaoConciliador</artifactId>-->
+<!--    <version>0.0.1-SNAPSHOT</version>-->
+<!--    <packaging>war</packaging>-->
+<!--    <name>conciliacaoConciliador</name>-->
+<!--    <description>Spring boot Micro-service - conciliacaoCob</description>-->
+<!--    &lt;!&ndash;	<properties>&ndash;&gt;-->
+<!--    &lt;!&ndash;		<java.version>11</java.version>&ndash;&gt;-->
+<!--    &lt;!&ndash;	</properties>&ndash;&gt;-->
+<!--    <dependencies>-->
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>spring-boot-starter-data-jpa</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>spring-boot-starter-web</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>org.postgresql</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>postgresql</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<scope>runtime</scope>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>spring-boot-starter-tomcat</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<scope>provided</scope>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>spring-boot-starter-test</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<scope>test</scope>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>org.projectlombok</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>lombok</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<optional>true</optional>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>spring-boot-starter-tomcat</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<scope>provided</scope>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>spring-boot-starter-test</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<scope>test</scope>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>io.springfox</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>springfox-boot-starter</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<version>3.0.0</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>org.apache.httpcomponents</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>httpclient</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<version>4.5.13</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>org.apache.commons</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>commons-lang3</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<version>3.12.0</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>net.kyori</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>adventure-text-serializer-gson</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<version>4.7.0</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>com.google.code.gson</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>gson</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<version>2.8.2</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+
+<!--        &lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<groupId>com.google.code.gson</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<artifactId>gson</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;			<version>2.8.6</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.conciliacaocob</groupId>-->
+<!--            <artifactId>core</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
+
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
+
+<!--</project>-->

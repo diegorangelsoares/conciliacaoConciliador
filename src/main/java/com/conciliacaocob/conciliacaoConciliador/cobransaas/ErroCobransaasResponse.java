@@ -14,6 +14,7 @@ public class ErroCobransaasResponse {
 
 
     private static final Map<Integer, String> errorMessageMap = new HashMap<>();
+
     static {
         errorMessageMap.put(HttpStatus.SC_BAD_REQUEST, "Regra de negócio");
         errorMessageMap.put(HttpStatus.SC_UNAUTHORIZED, "Acesso não autorizado, falta de autenticação");
@@ -109,7 +110,6 @@ public class ErroCobransaasResponse {
 
         return msg.toString();
     }
-
 
 
 }

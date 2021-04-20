@@ -1,7 +1,10 @@
 package com.conciliacaocob.conciliacaoConciliador.services;
 
-import com.conciliacaocob.conciliacaoConciliador.cobransaas.*;
 import com.conciliacaocob.conciliacaoConciliador.cobransaas.DTO.ContratoCobransaasDTO;
+import com.conciliacaocob.conciliacaoConciliador.cobransaas.DadosAcessoCobransaasDTO;
+import com.conciliacaocob.conciliacaoConciliador.cobransaas.ErroCobransaasResponse;
+import com.conciliacaocob.conciliacaoConciliador.cobransaas.ListagemContratosCobransaasResponse;
+import com.conciliacaocob.conciliacaoConciliador.cobransaas.ResponseCobransaas;
 import com.conciliacaocob.conciliacaoConciliador.model.Base;
 import com.conciliacaocob.conciliacaoConciliador.model.ConciliacaoCobranca;
 import com.conciliacaocob.conciliacaoConciliador.model.ContratoCobransaas;
@@ -11,6 +14,7 @@ import com.conciliacaocob.conciliacaoConciliador.repository.ContratoCobransaasRe
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -25,8 +29,10 @@ import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -39,9 +45,12 @@ import java.util.*;
 
 /**
  * Service ContratoCobransaas
+ *
  * @author Diego Rangel
  */
 @Service
+//@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+//@RequiredArgsConstructor()
 public class ContratoCobransaasService {
 
     private static final Logger logger = LoggerFactory.getLogger(ContratoCobransaasService.class);
@@ -53,21 +62,108 @@ public class ContratoCobransaasService {
     @Autowired
     ContratoCobransaasRepository contratoCobransaasRepository;
 
+    //@Autowired
+//    ContratoCobransaasRepository contratoCobransaasRepository = new ContratoCobransaasRepository() {
+//        @Override
+//        public ContratoCobransaas findById(long idEmissor) {
+//            return null;
+//        }
+//
+//        @Override
+//        public Optional<ContratoCobransaas> findById(Integer integer) {
+//            return Optional.empty();
+//        }
+//
+//        @Override
+//        public List<ContratoCobransaas> findContratoCobransaasByConciliacaoPageable(long conciliacao, Pageable pageable) {
+//            return null;
+//        }
+//
+//        @Override
+//        public List<ContratoCobransaas> findAllByConciliacao(long conciliacao, Pageable pageable) {
+//            return null;
+//        }
+//
+//        @Override
+//        public List<ContratoCobransaas> findAll() {
+//            return null;
+//        }
+//
+//        @Override
+//        public void deleteByConciliacao(long conciliacao) {
+//
+//        }
+//
+//        @Override
+//        public Iterable<ContratoCobransaas> findAll(Sort sort) {
+//            return null;
+//        }
+//
+//        @Override
+//        public Page<ContratoCobransaas> findAll(Pageable pageable) {
+//            return null;
+//        }
+//
+//        @Override
+//        public <S extends ContratoCobransaas> S save(S s) {
+//            return null;
+//        }
+//
+//        @Override
+//        public <S extends ContratoCobransaas> Iterable<S> saveAll(Iterable<S> iterable) {
+//            return null;
+//        }
+//
+//        @Override
+//        public boolean existsById(Integer integer) {
+//            return false;
+//        }
+//
+//        @Override
+//        public Iterable<ContratoCobransaas> findAllById(Iterable<Integer> iterable) {
+//            return null;
+//        }
+//
+//        @Override
+//        public long count() {
+//            return 0;
+//        }
+//
+//        @Override
+//        public void deleteById(Integer integer) {
+//
+//        }
+//
+//        @Override
+//        public void delete(ContratoCobransaas contratoCobransaas) {
+//
+//        }
+//
+//        @Override
+//        public void deleteAll(Iterable<? extends ContratoCobransaas> iterable) {
+//
+//        }
+//
+//        @Override
+//        public void deleteAll() {
+//
+//        }
+//    };
+
     @Autowired
     BaseRepository baseRepository;
 
-    public ContratoCobransaas buscarPorId(long id){
+    public ContratoCobransaas buscarPorId(long id) {
         return contratoCobransaasRepository.findById(id);
     }
 
-    public boolean salvarContratosCobransaas (ConciliacaoCobranca conciliacaoCobranca, List<ContratoCobransaas> contratos){
+    public boolean salvarContratosCobransaas(ConciliacaoCobranca conciliacaoCobranca, List<ContratoCobransaas> contratos) {
 
 
-
-        if (contratos != null){
+        if (contratos != null) {
             contratoCobransaasRepository.saveAll(contratos);
             return true;
-        }else{
+        } else {
             return false;
         }
 
@@ -189,7 +285,7 @@ public class ContratoCobransaasService {
 
     public ResponseCobransaas processarRequisicao(DadosAcessoCobransaasDTO dadosAcesso, String metodo, Map<String, String> queryParameters, String endpoint, Object requestBody, Type responseType) {
 
-        try ( CloseableHttpClient client = HttpClients.createDefault() ) {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
 
             URIBuilder uriBuilder = new URIBuilder(dadosAcesso.getEndereco() + endpoint);
             if (queryParameters != null) {
@@ -223,7 +319,7 @@ public class ContratoCobransaasService {
             }
 
             request.addHeader(HttpHeaders.AUTHORIZATION, "Basic " + dadosAcesso.getAuthorizationToken());
-            request.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON+"");
+            request.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON + "");
 
             if (requestBody != null && request instanceof HttpPost) {
                 HttpPost post = (HttpPost) request;
@@ -290,14 +386,14 @@ public class ContratoCobransaasService {
 
             CloseableHttpResponse response = client.execute(request);
 
-            if (response.getStatusLine().getStatusCode() != 200){
+            if (response.getStatusLine().getStatusCode() != 200) {
                 //System.out.println("[CobranSaaS] Erro no acesso a API do CobranSaaS - Erro: "+response.toString());
-                logger.error("[CobranSaaS] Erro no acesso a API do CobranSaaS - Erro: "+response.getStatusLine().toString());
+                logger.error("[CobranSaaS] Erro no acesso a API do CobranSaaS - Erro: " + response.getStatusLine().toString());
             }
             return processarResposta(response, responseType);
 
         } catch (IOException | URISyntaxException e) {
-            logger.error("[CobranSaaS] Erro no acesso a API do CobranSaaS - Erro: "+e.getMessage());
+            logger.error("[CobranSaaS] Erro no acesso a API do CobranSaaS - Erro: " + e.getMessage());
             return null;
         }
     }
@@ -324,46 +420,45 @@ public class ContratoCobransaasService {
 
         ResponseCobransaas responseCobransaas = new ResponseCobransaas();
 
-            try {
+        try {
 
-                Gson gson = new GsonBuilder().setLenient().create();
+            Gson gson = new GsonBuilder().setLenient().create();
 
-                Type type = responseType;
+            Type type = responseType;
 
-                type = new TypeToken<ArrayList<Object>>() {}.getType();
-                ArrayList<ContratoCobransaasDTO> contratos = gson.fromJson(new InputStreamReader(response.getEntity().getContent(), "UTF-8"), type);
+            type = new TypeToken<ArrayList<Object>>() {
+            }.getType();
+            ArrayList<ContratoCobransaasDTO> contratos = gson.fromJson(new InputStreamReader(response.getEntity().getContent(), "UTF-8"), type);
 
-                if (contratos != null) {
+            if (contratos != null) {
 
-                    contratos = ContratoCobransaas.parseObjetoToListContratoCobransaasDTO (contratos);
+                contratos = ContratoCobransaas.parseObjetoToListContratoCobransaasDTO(contratos);
 
-                }
-                responseCobransaas.setResponseBody(new ListagemContratosCobransaasResponse(contratos));
-
-            } catch (IOException | ParseException e) {
-                logger.error("[CobranSaaS] Problema ao processar a resposta do serviço");
             }
+            responseCobransaas.setResponseBody(new ListagemContratosCobransaasResponse(contratos));
 
-            return responseCobransaas;
+        } catch (IOException | ParseException e) {
+            logger.error("[CobranSaaS] Problema ao processar a resposta do serviço");
+        }
+
+        return responseCobransaas;
 
     }
 
-    public boolean removeContratosBaseLocal(Emissor emissor){
+    public boolean removeContratosBaseLocal(Emissor emissor) {
         contratoCobransaasRepository.deleteAll();
         return true;
     }
 
-    public boolean removeContratosDaConciliacao(Emissor emissor, long conciliacao){
+    public boolean removeContratosDaConciliacao(Emissor emissor, long conciliacao) {
         contratoCobransaasRepository.deleteByConciliacao(conciliacao);
         return true;
     }
 
-    public List<ContratoCobransaas> listaContratosSalvos (Pageable pageable, long conciliacao){
-        return contratoCobransaasRepository.findAllByConciliacao(conciliacao, pageable);
+    public List<ContratoCobransaas> listaContratosSalvos(Pageable pageable, long conciliacao) {
+        //return contratoCobransaasRepository.findAllByConciliacao(conciliacao, pageable);
+        return contratoCobransaasRepository.findAll();
     }
-
-
-
 
 
 }

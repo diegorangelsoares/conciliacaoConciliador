@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value="/api")
-@CrossOrigin(origins="*")
+@RequestMapping(value = "/api")
+@CrossOrigin(origins = "*")
 public class ConciliacaoCobrancaController {
 
     @Autowired
@@ -18,8 +18,8 @@ public class ConciliacaoCobrancaController {
     @Autowired
     ConciliacaoCobrancaService conciliacaoCobrancaService;
 
-    @GetMapping(path="listaConciliacao")
-    public ResponseEntity<?> listaConciliacao(@RequestParam("conciliacao") long conciliacao){
+    @GetMapping(path = "listaConciliacao")
+    public ResponseEntity<?> listaConciliacao(@RequestParam("conciliacao") long conciliacao) {
         return new ResponseEntity<>(conciliacaoCobrancaService.buscarPorId(conciliacao), HttpStatus.OK);
     }
 
@@ -34,8 +34,6 @@ public class ConciliacaoCobrancaController {
 //        }
 //
 //    }
-
-
 
 
 }

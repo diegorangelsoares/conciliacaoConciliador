@@ -1,31 +1,36 @@
 package com.conciliacaocob.conciliacaoConciliador.model;
 
+
 import com.conciliacaocob.conciliacaoConciliador.cobransaas.ClienteContratoCobransaas;
 import com.conciliacaocob.conciliacaoConciliador.cobransaas.DTO.ContratoCobransaasDTO;
 import com.conciliacaocob.conciliacaoConciliador.util.FuncoesData;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.internal.LinkedTreeMap;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Classe do objeto ContratoCobransaasNaoCards
+ *
  * @author Diego Rangel - diegorangeljpa@gmail.com
  */
 @Entity
-@Table(name="T_CONTRATOCOBRANSAAS")
-public class ContratoCobransaas {
+@Table(name = "T_CONTRATOCOBRANSAAS")
+@Getter
+@Setter
+public class ContratoCobransaas implements AbstractEntity {
 
     protected static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @SerializedName("id")
     private long id;
 
@@ -105,211 +110,11 @@ public class ContratoCobransaas {
     public ContratoCobransaas() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getIdExterno() {
-        return idExterno;
-    }
-
-    public void setIdExterno(String idExterno) {
-        this.idExterno = idExterno;
-    }
-
-    public String getNumeroContrato() {
-        return numeroContrato;
-    }
-
-    public void setNumeroContrato(String numeroContrato) {
-        this.numeroContrato = numeroContrato;
-    }
-
-    public Integer getNumeroParcelas() {
-        return numeroParcelas;
-    }
-
-    public void setNumeroParcelas(Integer numeroParcelas) {
-        this.numeroParcelas = numeroParcelas;
-    }
-
-    public String getDataEmissao() {
-        return dataEmissao;
-    }
-
-    public void setDataEmissao(String dataEmissao) {
-        this.dataEmissao = dataEmissao;
-    }
-
-    public Date getDataOperacao() {
-        return dataOperacao;
-    }
-
-    public void setDataOperacao(Date dataOperacao) {
-        this.dataOperacao = dataOperacao;
-    }
-
-    public String getSituacao() {
-        return situacao;
-    }
-
-    public void setSituacao(String situacao) {
-        this.situacao = situacao;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public Double getTaxaOperacao() {
-        return taxaOperacao;
-    }
-
-    public void setTaxaOperacao(Double taxaOperacao) {
-        this.taxaOperacao = taxaOperacao;
-    }
-
-    public Double getValorDevolucao() {
-        return valorDevolucao;
-    }
-
-    public void setValorDevolucao(Double valorDevolucao) {
-        this.valorDevolucao = valorDevolucao;
-    }
-
-    public Double getValorIof() {
-        return valorIof;
-    }
-
-    public void setValorIof(Double valorIof) {
-        this.valorIof = valorIof;
-    }
-
-    public Double getValorLiquido() {
-        return valorLiquido;
-    }
-
-    public void setValorLiquido(Double valorLiquido) {
-        this.valorLiquido = valorLiquido;
-    }
-
-    public Double getValorTarifa() {
-        return valorTarifa;
-    }
-
-    public void setValorTarifa(Double valorTarifa) {
-        this.valorTarifa = valorTarifa;
-    }
-
-    public Double getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public Double getSaldoAtual() {
-        return saldoAtual;
-    }
-
-    public void setSaldoAtual(Double saldoAtual) {
-        this.saldoAtual = saldoAtual;
-    }
-
-    public Double getSaldoTotal() {
-        return saldoTotal;
-    }
-
-    public void setSaldoTotal(Double saldoTotal) {
-        this.saldoTotal = saldoTotal;
-    }
-
-    public Double getSaldoAtraso() {
-        return saldoAtraso;
-    }
-
-    public void setSaldoAtraso(Double saldoAtraso) {
-        this.saldoAtraso = saldoAtraso;
-    }
-
-    public Integer getDiasAtraso() {
-        return diasAtraso;
-    }
-
-    public void setDiasAtraso(Integer diasAtraso) {
-        this.diasAtraso = diasAtraso;
-    }
-
-    public Date getDataVencimento() {
-        return dataVencimento;
-    }
-
-    public void setDataVencimento(Date dataVencimento) {
-        this.dataVencimento = dataVencimento;
-    }
-
-    public Date getDataHoraModificacao() {
-        return dataHoraModificacao;
-    }
-
-    public void setDataHoraModificacao(Date dataHoraModificacao) {
-        this.dataHoraModificacao = dataHoraModificacao;
-    }
-
-    public Boolean getLp() {
-        return lp;
-    }
-
-    public void setLp(Boolean lp) {
-        this.lp = lp;
-    }
-
-    public Date getDataLp() {
-        return dataLp;
-    }
-
-    public void setDataLp(Date dataLp) {
-        this.dataLp = dataLp;
-    }
-
-    public String getSiglaAtraso() {
-        return siglaAtraso;
-    }
-
-    public void setSiglaAtraso(String siglaAtraso) {
-        this.siglaAtraso = siglaAtraso;
-    }
-
-    public String getIdcliente() {
-        return idcliente;
-    }
-
-    public void setIdcliente(String idcliente) {
-        this.idcliente = idcliente;
-    }
-
-    public long getConciliacao() {
-        return conciliacao;
-    }
-
-    public void setConciliacao(long conciliacao) {
-        this.conciliacao = conciliacao;
-    }
-
     public static ArrayList<ContratoCobransaasDTO> parseObjetoToListContratoCobransaasDTO(ArrayList<ContratoCobransaasDTO> contratos) throws ParseException {
 
         ArrayList<ContratoCobransaasDTO> contratos2 = new ArrayList<>();
 
-        for(int i = 0; i < contratos.size(); i++) {
+        for (int i = 0; i < contratos.size(); i++) {
 
             ContratoCobransaasDTO contrato = new ContratoCobransaasDTO();
             Object getrow = contratos.get(i);
@@ -388,10 +193,10 @@ public class ContratoCobransaas {
         return cliente;
     }
 
-    public static ArrayList<ContratoCobransaas> parseObjetoToListContratoCobransaasDTOtoContratoCobransaas (List<ContratoCobransaasDTO> contratos, long conciliacao) {
-        ArrayList<ContratoCobransaas> contratos2 = new ArrayList<>();
+    public static List<ContratoCobransaas> parseObjetoToListContratoCobransaasDTOtoContratoCobransaas(List<ContratoCobransaasDTO> contratos, long conciliacao) {
+        List<ContratoCobransaas> contratos2 = new ArrayList<>();
 
-        for(int i = 0; i < contratos.size(); i++) {
+        for (int i = 0; i < contratos.size(); i++) {
 
             ContratoCobransaas contrato = new ContratoCobransaas();
             contrato.setId(contratos.get(i).getId());
@@ -425,7 +230,6 @@ public class ContratoCobransaas {
         return contratos2;
 
     }
-
 
 
 }

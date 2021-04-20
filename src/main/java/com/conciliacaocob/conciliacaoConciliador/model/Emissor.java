@@ -4,14 +4,15 @@ import javax.persistence.*;
 
 /**
  * Classe do objeto Emissor
+ *
  * @author Diego Rangel - diegorangeljpa@gmail.com
  */
 @Entity
-@Table(name="T_EMISSOR")
+@Table(name = "T_EMISSOR")
 public class Emissor {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
     public String nome;
 

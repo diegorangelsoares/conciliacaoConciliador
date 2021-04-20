@@ -327,7 +327,7 @@ public class ContratoCobransaasDTO {
 
         ArrayList<ContratoCobransaasDTO> contratos2 = new ArrayList<>();
 
-        for(int i = 0; i < contratos.size(); i++) {
+        for (int i = 0; i < contratos.size(); i++) {
 
             ContratoCobransaasDTO contrato = new ContratoCobransaasDTO();
             Object getrow = contratos.get(i);
@@ -405,7 +405,6 @@ public class ContratoCobransaasDTO {
 
         return cliente;
     }
-
 
 
 }
