@@ -9,7 +9,7 @@
         <relativePath>conciliacaoCob/pom.xml</relativePath>
         <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.conciliacaocob</groupId>
+
     <artifactId>conciliacaoConciliador</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
