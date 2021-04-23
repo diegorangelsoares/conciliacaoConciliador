@@ -6,15 +6,6 @@ spring:
   application:
     name: conciliacaoConciliador
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: http://localhost:8081/eureka
-    fetch-registry: true
-    register-with-eureka: true
-
   datasource:
     url: jdbc:postgresql://localhost:5433/conciliacaoconciliador
     #    username: ${DB_USER:postgres}
@@ -40,3 +31,11 @@ eureka:
           org.hibernate.dialect.PostgreSQL9Dialect
     database-plataform: org.hibernate.dialect.PostgreSQL9Dialect
 
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8081
+    fetch-registry: true
+    register-with-eureka: true
